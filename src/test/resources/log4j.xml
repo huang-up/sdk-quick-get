@@ -2,7 +2,7 @@
 <!DOCTYPE log4j:configuration SYSTEM
         "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 
-<log4j:configuration debug="true">
+<log4j:configuration debug="false">
     <!--
     * 1. 一个appender子元素定义一个日志输出目的地
     * 2. 一个logger子元素定义一个日志写出器
@@ -10,7 +10,7 @@
     <!-- catalina.out -->
     <appender name="consoleAppend" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss} [%5p][%t][%c{1}]-[%M] %m%n"></param>
+            <param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss} [%5p][%t][%c{1}]-[%M] %m%n"/>
         </layout>
     </appender>
     <!-- error log -->
