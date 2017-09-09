@@ -7,6 +7,7 @@ import org.apache.commons.vfs2.impl.DefaultFileSystemConfigBuilder;
 import org.apache.commons.vfs2.provider.sftp.SftpFileSystemConfigBuilder;
 import org.apache.log4j.Logger;
 import org.apache.log4j.net.SyslogAppender;
+import org.junit.Test;
 
 /**
  * Created by h on 2017/9/8.
@@ -14,10 +15,11 @@ import org.apache.log4j.net.SyslogAppender;
  */
 
 // http://pro.ctlok.com/2011/06/apache-commons-vfs-for-sftp.html
-public class Vfs2Test extends TestCase {
+public class Vfs2Test {
     private final static Logger LOGGER = Logger.getLogger(Vfs2Test.class);
 
-    public void testCreateFileObject() throws FileSystemException {
+    @Test
+    public void createFileObject() throws FileSystemException {
 
         // FileSystemManager 用来定位FileObject(resolveFile() 参数可以是 uri relativePath local)
         // This method will also automatically scan the classpath for a /META-INF/vfs-providers.xml file (also in jar files).
