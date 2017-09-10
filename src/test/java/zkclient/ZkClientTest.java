@@ -39,10 +39,14 @@ public class ZkClientTest {
     }
 
     @Test
-    public void createNode() {
+    public void createNode() throws InterruptedException {
         LOGGER.info("create node");
 //        zkClient.createPersistent("/persistent/sub/third");
         zkClient.createPersistent("/namespace/app");
+        for (int i = 0; i < 10; i++) {
+            zkClient.createEphemeralSequential("/server/app", ("app"+i).getBytes(Charsets.UTF_8));
+        }
+        for (;;) {}
     }
 
     @Test
