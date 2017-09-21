@@ -1,7 +1,7 @@
-package design.chapter3.srp;
+package design.principle.chapter5.lsp;
 
 /**
- * 单一职责原则
+ * 里氏代换原则
  * Created by admin on 2017/9/21.
  */
 public class AppClient {

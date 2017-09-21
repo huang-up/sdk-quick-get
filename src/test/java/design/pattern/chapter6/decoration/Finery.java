@@ -1,4 +1,4 @@
-package design.chapter6.decoration;
+package design.pattern.chapter6.decoration;
 
 import org.apache.log4j.Logger;
 

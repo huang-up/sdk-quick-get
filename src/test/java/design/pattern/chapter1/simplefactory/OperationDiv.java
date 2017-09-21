@@ -1,4 +1,4 @@
-package design.chapter1.simplefactory;
+package design.pattern.chapter1.simplefactory;
 
 /**
  * Created by admin on 2017/9/19.

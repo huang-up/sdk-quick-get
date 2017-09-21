@@ -1,4 +1,4 @@
-package design.chapter2.strategy;
+package design.pattern.chapter2.strategy;
 
 /**
  * 策略模式

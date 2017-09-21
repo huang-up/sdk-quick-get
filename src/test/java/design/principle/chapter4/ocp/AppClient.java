@@ -1,7 +1,7 @@
-package design.chapter5.dip;
+package design.principle.chapter4.ocp;
 
 /**
- * 依赖倒转原则
+ * 开闭原则
  * Created by admin on 2017/9/21.
  */
 public class AppClient {

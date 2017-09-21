@@ -1,4 +1,4 @@
-package design.chapter6.decoration;
+package design.pattern.chapter6.decoration;
 
 /**
  * Created by admin on 2017/9/19.
