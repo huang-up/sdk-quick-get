@@ -1,4 +1,4 @@
-package design.chapter1.simplefactory;
+package design.chapter1.simplefactorymixstrategy;
 
 /**
  * Created by admin on 2017/9/19.
