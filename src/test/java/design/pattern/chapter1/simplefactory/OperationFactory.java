@@ -4,7 +4,7 @@ package design.pattern.chapter1.simplefactory;
  * Created by admin on 2017/9/19.
  */
 public class OperationFactory {
-    public static Operation createOperation(String operate) {
+    public static Operation createOperate(String operate) {
         Operation operation = null;
         switch (operate) {
             case "+":
