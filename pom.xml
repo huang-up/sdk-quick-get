@@ -65,11 +65,12 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
         </dependency>
-        <dependency>
+        <!--偏向科学计算为主的函数，主要是针对线性代数，数学分析，概率和统计等方面。-->
+        <!--<dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
             <version>3.6</version>
-        </dependency>
+        </dependency>-->
         <!--处理常用的编码方法的工具类包 例如DES、SHA1、MD5、Base64等-->
         <dependency>
             <groupId>commons-codec</groupId>
@@ -111,6 +112,7 @@
             <artifactId>commons-validator</artifactId>
             <version>1.6</version>
         </dependency>
+        <!--封装了各种网络协议的客户端client SocketClient FTPClient -->
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
