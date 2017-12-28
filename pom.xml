@@ -28,15 +28,14 @@
             <version>1.7.25</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.25</version>
-        </dependency>
-
-        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.7</version>
         </dependency>
 
         <!--guava-->
@@ -205,20 +204,31 @@
             <version>0.10</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
+        <!--es-->
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
             <version>5.6.4</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-client -->
+        <!--es rest-client-->
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-client</artifactId>
             <version>5.6.4</version>
         </dependency>
 
+        <!--es plugin-->
+        <dependency>
+            <groupId>org.elasticsearch.plugin</groupId>
+            <artifactId>transport-netty3-client</artifactId>
+            <version>5.6.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.plugin</groupId>
+            <artifactId>transport-netty4-client</artifactId>
+            <version>5.6.4</version>
+        </dependency>
 
     </dependencies>
 
