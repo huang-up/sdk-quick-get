@@ -229,6 +229,28 @@
             <artifactId>transport-netty4-client</artifactId>
             <version>5.6.4</version>
         </dependency>
+       <!--<dependency>
+            <groupId>io.github.zacker330.es</groupId>
+            <artifactId>ik-analysis-es-plugin</artifactId>
+            <version>1.0.0</version>
+        </dependency>-->
+
+
+
+        <!--spirng-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.3.13.RELEASE</version>
+        </dependency>
+
+        <!--tomcat-->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>9.0.2</version>
+        </dependency>
+
 
     </dependencies>
 
