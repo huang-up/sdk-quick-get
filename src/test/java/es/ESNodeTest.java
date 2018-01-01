@@ -2,18 +2,29 @@ package es;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpHost;
 import org.apache.log4j.Logger;
 import org.elasticsearch.action.admin.indices.template.put.PutIndexTemplateResponse;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.Response;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeValidationException;
 import org.elasticsearch.plugin.analysis.ik.AnalysisIkPlugin;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.transport.Netty3Plugin;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.http.HttpMethod;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +40,8 @@ public class ESNodeTest {
 
     private static final Logger logger = Logger.getLogger(ESNodeTest.class);
     private Node node;
-    private final String elasticStorePath = "D:\\es-node";
+//    private final String elasticStorePath = "D:\\es-node";
+    private final String elasticStorePath = "/Users/h/es-node";
 
     @Before
     public void startNode() throws NodeValidationException, IOException {
@@ -89,7 +101,26 @@ public class ESNodeTest {
     }
 
     @Test
-    public void testRestSearch() {
+    public void testRestSearch() throws IOException {
+        // normal rest-client
+        RestClient restClient = RestClient.builder(new HttpHost("127.0.0.1", 9200, "http"))
+                .setMaxRetryTimeoutMillis(3000).build();
+        Response response = restClient.performRequest(HttpMethod.GET.name(), "/_search", null);
+        logger.info(IOUtils.toString(response.getEntity().getContent(), Charset.forName("utf-8")));
+
+        // high level rest-client
+        RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(
+                new HttpHost("localhost", 9200, "http")).build());
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+        searchSourceBuilder.aggregation(AggregationBuilders.terms("top_10_states").field("state").size(10));
+
+        SearchRequest searchRequest = new SearchRequest();
+        searchRequest.indices("social-*");
+        searchRequest.types();
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = client.search(searchRequest);
+
 
     }
 
