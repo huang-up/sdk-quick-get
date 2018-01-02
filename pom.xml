@@ -29,8 +29,8 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
                 <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>log4j-over-slf4j</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -50,25 +50,12 @@
         </dependency>
 
         <!--log-->
-        <!--<dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.7</version>
-            <scope>provided</scope>
-        </dependency>-->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-access</artifactId>
-            <version>1.1.7</version>
-            <scope>provided</scope>
-        </dependency>
-       <!-- <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.21</version>
-            <scope>provided</scope>
-        </dependency>-->
-        <!--<dependency>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>2.7</version>
@@ -77,7 +64,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.7</version>
-        </dependency>-->
+        </dependency>
 
         <!--guava-->
         <dependency>
@@ -234,16 +221,6 @@
             <artifactId>zkclient</artifactId>
             <version>2.1.1</version>
         </dependency>
-        <!--<dependency>
-            <groupId>com.github.sgroschupf</groupId>
-            <artifactId>zkclient</artifactId>
-            <version>0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.101tec</groupId>
-            <artifactId>zkclient</artifactId>
-            <version>0.10</version>
-        </dependency>-->
 
         <!--es-->
         <dependency>
@@ -265,7 +242,6 @@
             <version>5.6.4</version>
         </dependency>
 
-
         <!--es plugin-->
         <dependency>
             <groupId>org.elasticsearch.plugin</groupId>
@@ -277,13 +253,6 @@
             <artifactId>transport-netty4-client</artifactId>
             <version>5.6.4</version>
         </dependency>
-       <!--<dependency>
-            <groupId>io.github.zacker330.es</groupId>
-            <artifactId>ik-analysis-es-plugin</artifactId>
-            <version>1.0.0</version>
-        </dependency>-->
-
-
 
         <!--spirng-->
         <dependency>
@@ -292,24 +261,11 @@
             <version>4.3.13.RELEASE</version>
         </dependency>
 
-        <!-- logback-elasticsearch-appender -->
-        <!--<dependency>
-            <groupId>com.internetitem</groupId>
-            <artifactId>logback-elasticsearch-appender</artifactId>
-            <version>1.6</version>
-        </dependency>-->
-
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <!--<groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>-->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>

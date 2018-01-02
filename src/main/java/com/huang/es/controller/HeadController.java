@@ -38,7 +38,7 @@ public class HeadController {
             InputStream stream = null;
             Reader reader = null;
             try {
-                stream = getClass().getClassLoader().getResourceAsStream("_plugin/head/index.html");
+                stream = getClass().getClassLoader().getResourceAsStream("META-INF/resources/_plugin/head/index.html");
                 reader = new InputStreamReader(stream);
                 html = IOUtils.toString(reader);
 

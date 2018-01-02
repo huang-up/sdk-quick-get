@@ -3742,7 +3742,7 @@ var Sizzle = function( selector, context, results, seed ) {
 		parts = [],
 		soFar = selector;
 	
-	// Reset the position of the chunker regexp (start from head)
+	// Reset the position of the chunker regexp (start from _plugin.head)
 	do {
 		chunker.exec( "" );
 		m = chunker.exec( soFar );
