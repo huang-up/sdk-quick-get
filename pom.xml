@@ -27,6 +27,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--test-->
         <dependency>
@@ -219,12 +225,12 @@
             <groupId>com.github.sgroschupf</groupId>
             <artifactId>zkclient</artifactId>
             <version>0.1</version>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>com.101tec</groupId>
             <artifactId>zkclient</artifactId>
             <version>0.10</version>
-        </dependency>
+        </dependency>-->
 
         <!--es-->
         <dependency>
@@ -281,24 +287,44 @@
         </dependency>
 
         <!-- logback-elasticsearch-appender -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.internetitem</groupId>
             <artifactId>logback-elasticsearch-appender</artifactId>
             <version>1.6</version>
-        </dependency>
-
+        </dependency>-->
 
     </dependencies>
 
+    <!--<profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <filters>
+                    <filter>src/main/resources/bootstrap-dev.properties</filter>
+                </filters>
+            </build>
+        </profile>
+        <profile>
+            <id>test</id>
+        </profile>
+        <profile>
+            <id>online</id>
+        </profile>
+    </profiles>-->
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
+                <!--<groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>-->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
