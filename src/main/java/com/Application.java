@@ -1,10 +1,15 @@
 package com;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.Bean;
 
 /**
  * Created by admin on 2018/1/2.
@@ -25,4 +30,15 @@ public class Application implements CommandLineRunner {
     }
     @Override
     public void run(String... strings) throws Exception {}
+
+    @Bean
+    public HttpMessageConverters fastJsonHttpMessageConverters() {
+        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
+        fastConverter.setFeatures(SerializerFeature.WriteNullBooleanAsFalse, SerializerFeature.QuoteFieldNames,
+                SerializerFeature.WriteDateUseDateFormat, SerializerFeature.WriteNullStringAsEmpty,
+                SerializerFeature.DisableCircularReferenceDetect, SerializerFeature.SortField,
+                SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty);
+        JSON.DEFFAULT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+        return new HttpMessageConverters(fastConverter);
+    }
 }
