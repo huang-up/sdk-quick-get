@@ -50,8 +50,8 @@ public class ESNodeService {
 
     private static final Logger logger = LoggerFactory.getLogger(ESNodeService.class);
     public Node node;
-    private final String elasticStorePath = "D:\\es-node";
-//    private final String elasticStorePath = "/Users/h/es-node";
+//    private final String elasticStorePath = "D:\\es-node";
+    private final String elasticStorePath = "/Users/h/es-node";
     private AtomicLong queueSize = new AtomicLong(0l);
     private ConcurrentLinkedQueue<JSONObject> queue = new ConcurrentLinkedQueue<JSONObject>();
     private long maxQueueSize = 1024 * 1024l;

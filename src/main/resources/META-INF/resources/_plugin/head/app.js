@@ -2389,7 +2389,7 @@
 		},
 		_main_template: function() { return (
 			{ tag: "DIV", cls: "uiSidebarSection", children: [
-				(this.config.title && { tag: "DIV", cls: "uiSidebarSection-head", onclick: this._showSection_handler, children: [
+				(this.config.title && { tag: "DIV", cls: "uiSidebarSection-_plugin.head", onclick: this._showSection_handler, children: [
 					this.config.title,
 					( this.config.help && { tag: "SPAN", cls: "uiSidebarSection-help pull-right", onclick: this._showHelp_handler, text: i18n.text("General.HelpGlyph") } )
 				] }),
