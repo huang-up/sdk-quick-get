@@ -56,7 +56,8 @@ public class ESNodeService {
     private ConcurrentLinkedQueue<JSONObject> queue = new ConcurrentLinkedQueue<JSONObject>();
     private long maxQueueSize = 1024 * 1024l;
     private int maxBatchSize = 500;
-    private int storeThreadSize = 4;
+    private static int storeThreadSize = 4;
+    private ExecutorService executorService = null;
     private static final ThreadLocal<DateFormat> DATE_FORMAT = new ThreadLocal<DateFormat>(){
         @Override
         protected DateFormat initialValue() {
@@ -122,7 +123,7 @@ public class ESNodeService {
             queueSize.decrementAndGet();
         }
         if (i > 0) {
-            getExecutorService().submit(new Runnable() {
+            ExeSer.INSTANCE.getInstance().submit(new Runnable() {
                 @Override
                 public void run() {
                     BulkRequestBuilder builder = node.client().prepareBulk();
@@ -186,10 +187,27 @@ public class ESNodeService {
         }
     }
 
-    public ExecutorService getExecutorService() {
-        return Executors.newFixedThreadPool(storeThreadSize);
-    }
+    /*public ExecutorService getExecutorService() {
+        if (executorService == null) {
+            synchronized (this) {
+                if (executorService == null) {
+                    executorService = Executors.newFixedThreadPool(storeThreadSize);
+                }
+            }
+        }
+        return executorService;
+    }*/
 
+    enum ExeSer {
+        INSTANCE;
+        private ExecutorService executorService;
+        private ExeSer() {
+            executorService = Executors.newFixedThreadPool(storeThreadSize);
+        }
+        public ExecutorService getInstance() {
+            return executorService;
+        }
+    }
 
 
     public void setTemplateWithMapping() throws IOException, ExecutionException, InterruptedException {
