@@ -131,6 +131,7 @@ public class ESNodeService {
                         IndexRequestBuilder index = composeIndex(log);
                         builder.add(index);
                     }
+                    builder.execute();
                 }
             });
         }
@@ -142,7 +143,8 @@ public class ESNodeService {
         String app = source.getString("app");
         source.remove("app");
         //时间戳
-        String ts = DATE_FORMAT.get().format(source.getLong("d"));
+//        String ts = DATE_FORMAT.get().format(source.getLong("d"));
+        String ts = source.getString("d");
         source.put("@timestamp", ts);
         source.remove("d");
 
@@ -154,14 +156,14 @@ public class ESNodeService {
         //构建其他属性
         eval(source, "host", "host");
         eval(source, "pid", "pid");
-        eval(source, "severity", "level");
-        eval(source, "thread", "thread");
-        eval(source, "stacktrace", "exception");
-        eval(source, "logger", "logger");
-        eval(source, "cn", "contextName");
-        eval(source, "C", "class");
-        eval(source, "M", "method");
-        eval(source, "F", "file");
+        eval(source, "le", "level");
+        eval(source, "t", "thread");
+        eval(source, "xEx", "exception");
+        eval(source, "lo", "logger");
+//        eval(source, "cn", "contextName");
+//        eval(source, "C", "class");
+//        eval(source, "M", "method");
+//        eval(source, "F", "file");
 
         //解析json字段
         if (parseJson && StringUtils.startsWith(msg, "{")) {
