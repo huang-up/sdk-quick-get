@@ -67,7 +67,7 @@ public class ESNodeService {
     private boolean parseJson = true;
     private String jsonPropertyName = "data";
 
-    @PostConstruct
+//    @PostConstruct
     public void startNode() throws NodeValidationException, IOException, ExecutionException, InterruptedException {
         logger.info("start es node");
 

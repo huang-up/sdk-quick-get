@@ -1,12 +1,13 @@
 package com.huang.design.pattern.chapter27.interpreter.example;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by h on 2017/10/28.
  */
 public abstract class Expression {
-    protected static final Logger logger = Logger.getLogger(Expression.class);
+    protected static final Logger logger = LoggerFactory.getLogger(Expression.class);
     public void interpret(PlayContext context) {
         if (context.getText().length() == 0) {
             return;

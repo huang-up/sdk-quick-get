@@ -1,6 +1,7 @@
 package com.huang.design.pattern.chapter2.strategy;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 策略模式：定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。
@@ -22,9 +23,9 @@ import org.apache.log4j.Logger;
  * Created by admin on 2017/9/21.
  */
 public class AppClient {
-    private static final Logger logger = Logger.getLogger(AppClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(AppClient.class);
     public static void main(String[] args) {
         CashContext cashContext = new CashContext("打8折");
-        logger.info(cashContext.getResult(100d));
+        logger.info(String.valueOf(cashContext.getResult(100d)));
     }
 }

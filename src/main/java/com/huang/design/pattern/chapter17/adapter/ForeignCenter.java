@@ -1,12 +1,13 @@
 package com.huang.design.pattern.chapter17.adapter;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by h on 2017/10/15.
  */
 public class ForeignCenter{
-    private final static Logger logger = Logger.getLogger(ForeignCenter.class);
+    private final static Logger logger = LoggerFactory.getLogger(ForeignCenter.class);
     private String name;
     public ForeignCenter(String name) {
         this.name = name;

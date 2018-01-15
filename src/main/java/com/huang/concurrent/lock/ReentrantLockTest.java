@@ -1,8 +1,8 @@
 package com.huang.concurrent.lock;
 
-import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 // 除了ReadWriteLock内的ReadLock可以多线程并发进入
 public class ReentrantLockTest {
 
-    private final static Logger LOGGER = Logger.getLogger(ReentrantLockTest.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(ReentrantLockTest.class);
 
     @Test
     public void printChars() throws InterruptedException {

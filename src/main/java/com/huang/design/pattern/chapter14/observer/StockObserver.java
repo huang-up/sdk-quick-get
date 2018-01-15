@@ -1,6 +1,7 @@
 package com.huang.design.pattern.chapter14.observer;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by h on 2017/10/8.
@@ -8,7 +9,7 @@ import org.apache.log4j.Logger;
 public class StockObserver implements Observer {
     private String name;
     private Subject subject;
-    private static final Logger logger = Logger.getLogger(StockObserver.class);
+    private static final Logger logger = LoggerFactory.getLogger(StockObserver.class);
     public StockObserver() {}
     public StockObserver(String name, Subject subject) {
         this.name = name;

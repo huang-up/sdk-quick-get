@@ -1,6 +1,7 @@
 package com.huang.design.pattern.chapter1.simplefactory;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断，根据客户端的选择条件动态实例化相关的类，
@@ -14,9 +15,9 @@ import org.apache.log4j.Logger;
  * Created by h on 2017/9/21.
  */
 public class AppClient {
-    private static final Logger logger = Logger.getLogger(AppClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(AppClient.class);
     public static void main(String[] args) {
-        logger.info(getResult(1,2,"+"));
+        logger.info(String.valueOf(getResult(1,2,"+")));
     }
 
     public static double getResult(double numA, double numB, String operate) {

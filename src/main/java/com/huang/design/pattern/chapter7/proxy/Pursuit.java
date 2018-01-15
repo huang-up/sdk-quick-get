@@ -1,13 +1,15 @@
 package com.huang.design.pattern.chapter7.proxy;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by h on 2017/9/19.
  * Pursuit 依赖 SchoolGirl
  */
 public class Pursuit implements GiveGift {
-    private Logger logger = Logger.getLogger(Pursuit.class);
+    private Logger logger = LoggerFactory.getLogger(Pursuit.class);
     private String name;
     private SchoolGirl schoolGirl;
     public Pursuit(String name, SchoolGirl schoolGirl) {

@@ -5,9 +5,10 @@ import org.apache.commons.vfs2.*;
 import org.apache.commons.vfs2.auth.StaticUserAuthenticator;
 import org.apache.commons.vfs2.impl.DefaultFileSystemConfigBuilder;
 import org.apache.commons.vfs2.provider.sftp.SftpFileSystemConfigBuilder;
-import org.apache.log4j.Logger;
 import org.apache.log4j.net.SyslogAppender;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by h on 2017/9/8.
@@ -16,7 +17,7 @@ import org.junit.Test;
 
 // http://pro.ctlok.com/2011/06/apache-commons-vfs-for-sftp.html
 public class Vfs2Test {
-    private final static Logger LOGGER = Logger.getLogger(Vfs2Test.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(Vfs2Test.class);
 
     @Test
     public void createFileObject() throws FileSystemException {

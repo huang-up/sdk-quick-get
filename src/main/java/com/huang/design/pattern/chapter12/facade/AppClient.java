@@ -1,6 +1,7 @@
 package com.huang.design.pattern.chapter12.facade;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 外观模式：
@@ -17,7 +18,7 @@ import org.apache.log4j.Logger;
  * Created by h on 2017/9/27.
  */
 public class AppClient {
-    private static final Logger logger = Logger.getLogger(AppClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(AppClient.class);
     public static void main(String[] args) {
         Fund fund = new Fund();
         fund.buyFund();

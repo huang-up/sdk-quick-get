@@ -1,13 +1,14 @@
 package com.huang.design.pattern.chapter10.templatemethod;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 试题
  * Created by admin on 2017/9/25.
  */
 public abstract class TestPaper {
-    private static final Logger logger = Logger.getLogger(TestPaper.class);
+    private static final Logger logger = LoggerFactory.getLogger(TestPaper.class);
 
     public void testQuesttion1() {
         logger.info("question1");

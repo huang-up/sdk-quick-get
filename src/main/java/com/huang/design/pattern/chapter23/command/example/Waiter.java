@@ -1,6 +1,7 @@
 package com.huang.design.pattern.chapter23.command.example;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by h on 2017/10/22.
  */
 public class Waiter {
-    private static final Logger logger = Logger.getLogger(Waiter.class);
+    private static final Logger logger = LoggerFactory.getLogger(Waiter.class);
     private List<Command> commandList = new ArrayList<Command>();
     public void setOrder(Command command) {
         if(command.name.equals("烤鸡翅")) {

@@ -1,12 +1,13 @@
 package com.huang.design.pattern.chapter24.chainofresponsibility.example;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by h on 2017/10/23.
  */
 public abstract class Manager {
-    protected static final Logger logger = Logger.getLogger(Manager.class);
+    protected static final Logger logger = LoggerFactory.getLogger(Manager.class);
     protected String name;
 //    管理者的上级
     protected Manager superior;

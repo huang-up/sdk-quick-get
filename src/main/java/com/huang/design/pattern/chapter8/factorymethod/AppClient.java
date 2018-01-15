@@ -1,6 +1,7 @@
 package com.huang.design.pattern.chapter8.factorymethod;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 工厂方法模式：定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。
@@ -20,7 +21,7 @@ import org.apache.log4j.Logger;
  * Created by h on 2017/9/23.
  */
 public class AppClient {
-    private static final Logger logger = Logger.getLogger(AppClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(AppClient.class);
     public static void main(String[] args) {
         IFactory iFactory = new UndergraduateFactory();
         LeiFeng leiFeng = iFactory.createLeiFeng();

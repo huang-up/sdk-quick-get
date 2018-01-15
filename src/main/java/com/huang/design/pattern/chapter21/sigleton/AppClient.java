@@ -1,6 +1,7 @@
 package com.huang.design.pattern.chapter21.sigleton;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 单例模式：保证一个类只有一个实例，并提供一个访问它的全局访问点。
@@ -11,7 +12,7 @@ import org.apache.log4j.Logger;
  * Created by admin on 2017/10/19.
  */
 public class AppClient {
-    private static final Logger logger = Logger.getLogger(AppClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(AppClient.class);
     public static void main(String[] args) {
         Singleton singleton = Singleton.getInstance();
         Singleton singleton1 = Singleton.getInstance();

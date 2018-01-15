@@ -1,12 +1,13 @@
 package com.huang.design.pattern.chapter18.memento;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by h on 2017/10/19.
  */
 public class Originator {
-    private static final Logger logger = Logger.getLogger(Originator.class);
+    private static final Logger logger = LoggerFactory.getLogger(Originator.class);
     private String state;
     public void setMemento(Memento memento) {
         this.state = memento.getState();

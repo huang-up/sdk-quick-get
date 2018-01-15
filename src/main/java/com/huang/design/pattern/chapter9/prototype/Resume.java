@@ -1,12 +1,13 @@
 package com.huang.design.pattern.chapter9.prototype;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by h on 2017/9/24.
  */
 public class Resume implements Cloneable {
-    private static final Logger logger = Logger.getLogger(Resume.class);
+    private static final Logger logger = LoggerFactory.getLogger(Resume.class);
     private String name;
     private String gender;
     private int age;

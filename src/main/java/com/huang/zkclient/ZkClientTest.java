@@ -6,12 +6,14 @@ import com.github.zkclient.IZkStateListener;
 import com.github.zkclient.ZkClient;
 import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.io.Charsets;
-import org.apache.log4j.Logger;
+
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.data.Stat;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +22,7 @@ import java.util.Date;
  * Created by h on 2017/9/9.
  */
 public class ZkClientTest {
-    private final static Logger LOGGER = Logger.getLogger(ZkClientTest.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(ZkClientTest.class);
     //    private IZkClient zkClient = new ZkClient("127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002");
     private IZkClient zkClient;
 
@@ -59,10 +61,10 @@ public class ZkClientTest {
     @Test
     public void searchNode() {
         LOGGER.info("search node");
-        LOGGER.info(zkClient.exists("/persistent"));
+        LOGGER.info(String.valueOf(zkClient.exists("/persistent")));
         LOGGER.info(new SimpleDateFormat("yyyyMMdd HH:mm:ss.SSS").format(new Date(zkClient.getCreationTime("/persistent"))));
-        LOGGER.info(zkClient.getChildren("/persistent"));
-        LOGGER.info(zkClient.countChildren("/persistent"));
+        LOGGER.info("/persistent children: {}", zkClient.getChildren("/persistent"));
+        LOGGER.info("/persistent children count: {}", zkClient.countChildren("/persistent"));
     }
 
     @Test
