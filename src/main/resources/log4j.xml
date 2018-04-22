@@ -54,9 +54,9 @@
     <root>
         <level value="info"/>
         <appender-ref ref="consoleAppender"/>
-        <appender-ref ref="fileAppenderInfo"/>
-        <appender-ref ref="fileAppenderWarn"/>
-        <appender-ref ref="fileAppenderError"/>
+        <!--<appender-ref ref="fileAppenderInfo"/>-->
+        <!--<appender-ref ref="fileAppenderWarn"/>-->
+        <!--<appender-ref ref="fileAppenderError"/>-->
     </root>
 
 </log4j:configuration>
