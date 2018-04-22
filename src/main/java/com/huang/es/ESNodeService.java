@@ -6,6 +6,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpHost;
+import org.apache.http.util.EntityUtils;
 import org.elasticsearch.action.admin.indices.template.put.PutIndexTemplateResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.index.IndexRequestBuilder;
@@ -14,14 +15,19 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeValidationException;
 import org.elasticsearch.plugin.analysis.ik.AnalysisIkPlugin;
+import org.elasticsearch.plugin.nlpcn.SqlPlug;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.transport.Netty3Plugin;
+import org.elasticsearch.transport.Netty4Plugin;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -33,8 +39,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -45,7 +54,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by admin on 2017/12/26.
  */
-@Service
+//@Service
 public class ESNodeService {
 
     private static final Logger logger = LoggerFactory.getLogger(ESNodeService.class);
@@ -57,7 +66,7 @@ public class ESNodeService {
     private long maxQueueSize = 1024 * 1024l;
     private int maxBatchSize = 500;
     private static int storeThreadSize = 4;
-    private ExecutorService executorService = null;
+//    private ExecutorService executorService = null;
     private static final ThreadLocal<DateFormat> DATE_FORMAT = new ThreadLocal<DateFormat>(){
         @Override
         protected DateFormat initialValue() {
@@ -67,7 +76,7 @@ public class ESNodeService {
     private boolean parseJson = true;
     private String jsonPropertyName = "data";
 
-//    @PostConstruct
+    @PostConstruct
     public void startNode() throws NodeValidationException, IOException, ExecutionException, InterruptedException {
         logger.info("start es node");
 
@@ -78,19 +87,30 @@ public class ESNodeService {
                 .put("cluster.name", "my-es")
                 .put("node.name", "node-1")
                 .put("path.home", elasticStorePath)
-                .put("transport.type", "local")
+                .put("transport.type", "netty3")
+                .put("transport.type", "netty4")
+//                .put("transport.type", "local")
                 .put("http.enabled", true)
                 .put("http.port", 9200)
                 .put("http.cors.enabled", true)
                 .put("http.cors.allow-origin", "*")
                 .put("http.type", "netty3")
+                .put("http.type", "netty4")
                 .put("transport.tcp.port", 9300)
-                .put("network.bind_host", "0.0.0.0").build();
-        Collection plugins = Arrays.asList(Netty3Plugin.class, AnalysisIkPlugin.class);
+                .put("network.bind_host", "0.0.0.0")
+                .build();
+        Collection plugins = Arrays.asList(Netty3Plugin.class, Netty4Plugin.class, AnalysisIkPlugin.class, SqlPlug.class);
         node = new PluginConfigurableNode(settings, plugins);
         node.start();
 
-//        setTemplateWithMapping();
+        setTemplateWithMapping();
+    }
+
+    @PreDestroy
+    public void destory() throws IOException {
+        if (!node.isClosed()) {
+            node.close();
+        }
     }
 
     public void setup() throws IOException {
@@ -214,7 +234,7 @@ public class ESNodeService {
 
     public void setTemplateWithMapping() throws IOException, ExecutionException, InterruptedException {
         PathMatchingResourcePatternResolver pathMatchingResolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = pathMatchingResolver.getResources("classpath*:cdr/*");
+        Resource[] resources = pathMatchingResolver.getResources("classpath*:mapping/*/*");
         for (Resource resource:resources) {
             File file = resource.getFile();
             String indexName = file.getParentFile().getName();
@@ -222,41 +242,13 @@ public class ESNodeService {
             String content = FileUtils.readFileToString(file, Charset.forName("utf-8"));
             JSONObject json = JSONObject.parseObject(content);
             String templateName = String.format("template-%s-%s", indexName, typeName);
+            indexName = indexName.equals("app") ? "*-" : indexName;
             PutIndexTemplateResponse response = node.client().admin().indices()
                     .preparePutTemplate(templateName)
                     .setTemplate(indexName + "*")
+                    .setSettings(Settings.builder().put("number_of_shards", 5).put("number_of_replicas", 0).build())
                     .addMapping(typeName, json).execute().get();
-            logger.info(String.format("template response: %s", response.toString()));
             logger.info(String.format("add template: %s", templateName));
         }
-    }
-
-    @Test
-    public void testRestSearch() throws IOException {
-        // normal rest-client
-        RestClient restClient = RestClient.builder(new HttpHost("127.0.0.1", 9200, "http"))
-                .setMaxRetryTimeoutMillis(3000).build();
-        Response response = restClient.performRequest(HttpMethod.GET.name(), "/_search");
-        logger.info(IOUtils.toString(response.getEntity().getContent(), Charset.forName("utf-8")));
-
-        // high level rest-client
-        RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(
-                new HttpHost("localhost", 9200, "http")).build());
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
-        searchSourceBuilder.aggregation(AggregationBuilders.terms("top_10_states").field("state").size(10));
-
-        SearchRequest searchRequest = new SearchRequest();
-        searchRequest.indices("social-*");
-        searchRequest.types();
-        searchRequest.source(searchSourceBuilder);
-        SearchResponse searchResponse = client.search(searchRequest);
-
-
-    }
-
-    @Test
-    public void testTransportClientSearch() {
-
     }
 }

@@ -1,0 +1,360 @@
+{
+  "cdr": {
+      "_source": {
+          "enabled": false
+      },
+      "properties": {
+        "tag_lable": {
+          "type": "nested",
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "user_id": {
+              "type": "keyword"
+            },
+            "update_time": {
+              "type": "date"
+            },
+            "db_day": {
+              "type": "keyword"
+            },
+            "tag_txt": {
+              "properties": {
+                "tags": {
+                  "type": "text",
+                  "analyzer": "ik_smart"
+                }
+              }
+            }
+          }
+        },
+        "tag_imp": {
+          "type": "nested",
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "user_id": {
+              "type": "keyword"
+            },
+            "update_time": {
+              "type": "date"
+            },
+            "db_day": {
+              "type": "keyword"
+            },
+            "tag_imp": {
+              "properties": {
+                "imp": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "tag_lang": {
+          "type": "nested",
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "user_id": {
+              "type": "keyword"
+            },
+            "update_time": {
+              "type": "date"
+            },
+            "db_day": {
+              "type": "keyword"
+            },
+            "tag_lang": {
+              "properties": {
+                "lang": {
+                  "type": "keyword"
+                }
+              }
+            }
+          }
+        },
+        "tag_memo": {
+          "type": "nested",
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "user_id": {
+              "type": "keyword"
+            },
+            "update_time": {
+              "type": "date"
+            },
+            "db_day": {
+              "type": "keyword"
+            },
+            "tag_memo": {
+              "properties": {
+                "memo": {
+                  "type": "text",
+                  "analyzer": "ik_smart"
+                }
+              }
+            }
+          }
+        },
+        "tag_listen": {
+          "type": "nested",
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "user_id": {
+              "type": "keyword"
+            },
+            "update_time": {
+              "type": "date"
+            },
+            "db_day": {
+              "type": "keyword"
+            },
+            "listen_tag": {
+              "properties": {
+                "listen": {
+                  "type": "boolean"
+                },
+                "cnt": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "files": {
+          "type": "text",
+          "index": "false"
+        },
+        "custom_id": {
+          "type": "keyword"
+        },
+        "db_day": {
+          "type": "keyword"
+        },
+        "dur": {
+          "type": "long"
+        },
+        "fulltext-chin": {
+          "type": "text",
+          "analyzer": "ik_smart"
+        },
+        "fulltext-engl": {
+          "type": "text",
+          "analyzer": "english"
+        },
+        "fulltext-uyhu": {
+          "type": "text",
+          "analyzer": "ik_smart"
+        },
+        "rela_num": {
+          "type": "keyword"
+        },
+        "is_shared": {
+          "type": "boolean"
+        },
+        "dec_sc": {
+          "type": "float"
+        },
+        "flag": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "keyword"
+        },
+        "home_num": {
+          "type": "keyword"
+        },
+        "tl_a": {
+          "type": "long",
+          "index": "false"
+        },
+        "tl_b": {
+          "type": "long",
+          "index": "false"
+        },
+        "auth": {
+          "type": "nested",
+          "properties": {
+            "cr_id": {
+              "type": "keyword"
+            },
+            "user_id": {
+              "type": "keyword"
+            },
+            "case_id": {
+              "type": "keyword"
+            },
+            "org_id": {
+              "type": "text",
+              "index": "false"
+            },
+            "obj_id": {
+              "type": "text",
+              "index": "false"
+            },
+            "obj_num": {
+              "type": "text",
+              "index": "false"
+            },
+            "auth_type": {
+              "type": "integer"
+            },
+            "creator_id": {
+              "type": "text",
+              "index": "false"
+            },
+            "creator_org_id": {
+              "type": "keyword"
+            },
+            "create_time": {
+              "type": "date"
+            },
+            "modify_time": {
+              "type": "date"
+            },
+            "start_time": {
+              "type": "date"
+            },
+            "end_time": {
+              "type": "date"
+            },
+            "remark": {
+              "type": "text",
+              "analyzer": "ik_smart"
+            },
+            "share_user_id": {
+              "type": "text",
+              "index": "false"
+            },
+            "db_day": {
+              "type": "keyword"
+            }
+          }
+        },
+        "lang_sc": {
+          "type": "float"
+        },
+        "cdr_type": {
+          "type": "integer"
+        },
+        "ds": {
+          "type": "keyword"
+        },
+        "lang_dec": {
+          "type": "text",
+          "index": "false"
+        },
+        "id": {
+          "type": "keyword"
+        },
+        "lang": {
+          "type": "keyword"
+        },
+        "nlp_sc": {
+          "type": "float"
+        },
+        "vtl_b": {
+          "type": "long",
+          "index": "false"
+        },
+        "vtl_a": {
+          "type": "long",
+          "index": "false"
+        },
+        "vtl_sum": {
+          "type": "long"
+        },
+        "cp": {
+          "type": "integer"
+        },
+        "codec": {
+          "type": "integer"
+        },
+        "codec_desc": {
+          "type": "text",
+          "index": "false"
+        },
+        "create_time": {
+          "type": "date"
+        },
+        "begin_time": {
+          "type": "date"
+        },
+        "home_country": {
+          "type": "keyword"
+        },
+        "rela_country": {
+          "type": "keyword"
+        },
+        "home_area": {
+          "type": "keyword"
+        },
+        "rela_area": {
+          "type": "keyword"
+        },
+        "rela_ip": {
+          "type": "keyword"
+        },
+        "cdr_desc": {
+          "type": "text",
+          "index": "false"
+        },
+        "imsi": {
+          "type": "text",
+          "index": "false"
+        },
+        "imei": {
+          "type": "text",
+          "index": "false"
+        },
+        "neid": {
+          "type": "text",
+          "index": "false"
+        },
+        "router_out": {
+          "type": "text",
+          "index": "false"
+        },
+        "router_in": {
+          "type": "text",
+          "index": "false"
+        },
+        "lai": {
+          "type": "text",
+          "index": "false"
+        },
+        "ci": {
+          "type": "text",
+          "index": "false"
+        },
+        "ggsn": {
+          "type": "text",
+          "index": "false"
+        },
+        "sgsn": {
+          "type": "text",
+          "index": "false"
+        },
+        "pdp": {
+          "type": "text",
+          "index": "false"
+        },
+        "ld": {
+          "type": "integer",
+          "index": "false"
+        },
+        "location": {
+          "type": "geo_point"
+        }
+      }
+  }
+}
+

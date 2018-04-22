@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by admin on 2018/1/2.
  */
-@RestController
+//@RestController
 public class LogController {
 
     @Autowired
