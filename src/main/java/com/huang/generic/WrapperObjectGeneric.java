@@ -4,6 +4,7 @@ package com.huang.generic;
  * 基本类型的包装类。
  * Created by h on 2017/11/2.
  */
+
 public class WrapperObjectGeneric {
     public static void main(String[] args) {
         ObjectGeneric mc = new ObjectGeneric();

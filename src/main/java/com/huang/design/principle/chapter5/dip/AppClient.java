@@ -1,4 +1,4 @@
-package design.principle.chapter5.dip;
+package com.huang.design.principle.chapter5.dip;
 
 /**
  * 依赖倒转原则：抽象不应该依赖细节，细节应该依赖于抽象。即针对接口编程，不要针对实现编程。

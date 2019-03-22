@@ -3,38 +3,21 @@ package com.huang.es;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.http.HttpHost;
-import org.apache.http.util.EntityUtils;
 import org.elasticsearch.action.admin.indices.template.put.PutIndexTemplateResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.index.IndexRequestBuilder;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.Response;
-import org.elasticsearch.client.RestClient;
-import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeValidationException;
 import org.elasticsearch.plugin.analysis.ik.AnalysisIkPlugin;
 import org.elasticsearch.plugin.nlpcn.SqlPlug;
-import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.transport.Netty3Plugin;
 import org.elasticsearch.transport.Netty4Plugin;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
-import org.junit.Before;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -42,19 +25,20 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by admin on 2017/12/26.
  */
-//@Service
+@Service
 public class ESNodeService {
 
     private static final Logger logger = LoggerFactory.getLogger(ESNodeService.class);
@@ -143,16 +127,13 @@ public class ESNodeService {
             queueSize.decrementAndGet();
         }
         if (i > 0) {
-            ExeSer.INSTANCE.getInstance().submit(new Runnable() {
-                @Override
-                public void run() {
-                    BulkRequestBuilder builder = node.client().prepareBulk();
-                    for (JSONObject log : logs) {
-                        IndexRequestBuilder index = composeIndex(log);
-                        builder.add(index);
-                    }
-                    builder.execute();
+            ExeSer.INSTANCE.getInstance().submit(() -> {
+                BulkRequestBuilder builder = node.client().prepareBulk();
+                for (JSONObject _log : logs) {
+                    IndexRequestBuilder index = composeIndex(_log);
+                    builder.add(index);
                 }
+                builder.execute();
             });
         }
     }
@@ -223,7 +204,7 @@ public class ESNodeService {
     enum ExeSer {
         INSTANCE;
         private ExecutorService executorService;
-        private ExeSer() {
+        ExeSer() {
             executorService = Executors.newFixedThreadPool(storeThreadSize);
         }
         public ExecutorService getInstance() {

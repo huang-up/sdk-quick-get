@@ -1,4 +1,4 @@
-package design.principle.chapter5.lsp;
+package com.huang.design.principle.chapter5.lsp;
 
 /**
  * 里氏代换原则：子类型必须能够替换掉它们的父类型。

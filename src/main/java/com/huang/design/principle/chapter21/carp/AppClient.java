@@ -1,4 +1,4 @@
-package design.principle.chapter21.carp;
+package com.huang.design.principle.chapter21.carp;
 
 /**
  * 合成/聚合复用原则（CARP），尽量使用合成/聚合，尽量不要使用类继承。

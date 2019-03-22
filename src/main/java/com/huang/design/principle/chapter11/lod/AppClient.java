@@ -1,4 +1,4 @@
-package design.principle.chapter11.lod;
+package com.huang.design.principle.chapter11.lod;
 
 /**
  * 迪米特法则（最少知识原则）：如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。

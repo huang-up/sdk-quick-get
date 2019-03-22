@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by h on 2017/10/15.
  */
-public class ForeignCenter{
+public class ForeignCenter {
     private final static Logger logger = LoggerFactory.getLogger(ForeignCenter.class);
     private String name;
     public ForeignCenter(String name) {

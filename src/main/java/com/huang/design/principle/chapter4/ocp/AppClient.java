@@ -1,4 +1,4 @@
-package design.principle.chapter4.ocp;
+package com.huang.design.principle.chapter4.ocp;
 
 /**
  * 开放-封闭原则：软件实体（类、模块、函数等）应该可以扩展，但是不可以修改。
